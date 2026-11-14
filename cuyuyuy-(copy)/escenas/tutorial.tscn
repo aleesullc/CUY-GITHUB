@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://c0mw2cq2ekxkh"]
+
+[ext_resource type="Script" uid="uid://b23w5qdejk3d5" path="res://parallax_2d.gd" id="1_yvbs1"]
+[ext_resource type="Texture2D" uid="uid://c6ennnc8ydkq7" path="res://escenas/calle_day.png" id="2_a5rpn"]
+[ext_resource type="PackedScene" uid="uid://b3imov4cjohs8" path="res://escenas/cuy.tscn" id="3_wvpk2"]
+[ext_resource type="Script" uid="uid://c3few1pcb56l" path="res://canvas_layer.gd" id="5_a5rpn"]
+[ext_resource type="PackedScene" uid="uid://t4exeuoq4f60" path="res://escenas/barra_de_vida.tscn" id="5_prqkn"]
+[ext_resource type="Texture2D" uid="uid://cd6xvgvyukqtg" path="res://Sprites/Tiles/Double/spring.png" id="6_gd7gy"]
+[ext_resource type="Texture2D" uid="uid://dxehbrbvf8fm0" path="res://sprites_ale/corazon_lleno.png" id="7_a5rpn"]
+[ext_resource type="Texture2D" uid="uid://cacuo8kwu6iwp" path="res://sprites_ale/corazon_vacio.png" id="8_8ol1g"]
+[ext_resource type="PackedScene" uid="uid://0nb3jj3875ni" path="res://escenas/enemigo.tscn" id="9_a5rpn"]
+[ext_resource type="Texture2D" uid="uid://btbt78i3eu05f" path="res://sprites_ale/azul.png" id="10_xesl2"]
+[ext_resource type="Texture2D" uid="uid://du71ua2uufybd" path="res://sprites_ale/rosa.png" id="11_mash6"]
+[ext_resource type="Texture2D" uid="uid://cofr2p53c77yn" path="res://sprites_ale/verde.png" id="12_phrk8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kaos3"]
+size = Vector2(157, 20)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bhj16"]
+texture = ExtResource("10_xesl2")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x1jk5"]
+texture = ExtResource("11_mash6")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tm3bn"]
+texture = ExtResource("12_phrk8")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_efmnq"]
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_bhj16")
+sources/2 = SubResource("TileSetAtlasSource_x1jk5")
+sources/3 = SubResource("TileSetAtlasSource_tm3bn")
+
+[node name="Node2D" type="Node2D" unique_id=1631754125]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1479369394]
+repeat_size = Vector2(640, 0)
+script = ExtResource("1_yvbs1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=312337150]
+z_index = -10
+texture = ExtResource("2_a5rpn")
+centered = false
+
+[node name="Cuy" parent="." unique_id=86704918 groups=["jugador"] instance=ExtResource("3_wvpk2")]
+texture_filter = 1
+position = Vector2(80, 312)
+
+[node name="Suelo" type="StaticBody2D" parent="." unique_id=1933985449]
+position = Vector2(48, 208)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Suelo" unique_id=1371230826]
+position = Vector2(33.5, 128)
+shape = SubResource("RectangleShape2D_kaos3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Suelo" unique_id=1862900248]
+position = Vector2(32, 144)
+rotation = -3.1415927
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("6_gd7gy")
+
+[node name="Suelo2" type="StaticBody2D" parent="." unique_id=820992095]
+position = Vector2(240, 208)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Suelo2" unique_id=141394276]
+position = Vector2(33.5, 128)
+shape = SubResource("RectangleShape2D_kaos3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Suelo2" unique_id=221120468]
+position = Vector2(32, 144)
+rotation = -3.1415927
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("6_gd7gy")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=747062252]
+position = Vector2(320, 184)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1217262196]
+script = ExtResource("5_a5rpn")
+
+[node name="HBoxContainer" parent="CanvasLayer" unique_id=199049918 instance=ExtResource("5_prqkn")]
+texture_filter = 1
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 65.0
+offset_bottom = 20.0
+scale = Vector2(2.5, 2.5)
+corazon_lleno = ExtResource("7_a5rpn")
+corazon_vacio = ExtResource("8_8ol1g")
+
+[node name="Node2D" parent="." unique_id=393722942 instance=ExtResource("9_a5rpn")]
+position = Vector2(476, 39)
+
+[node name="Bloques" type="TileMapLayer" parent="." unique_id=1545017990]
+tile_set = SubResource("TileSet_efmnq")
