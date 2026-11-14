@@ -102,7 +102,7 @@ corazon_lleno = ExtResource("7_a5rpn")
 corazon_vacio = ExtResource("8_8ol1g")
 
 [node name="Node2D" parent="." unique_id=393722942 instance=ExtResource("9_a5rpn")]
-position = Vector2(476, 39)
+position = Vector2(372, -42)
 
 [node name="Bloques" type="TileMapLayer" parent="." unique_id=1545017990]
 tile_set = SubResource("TileSet_efmnq")
